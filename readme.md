@@ -3,21 +3,42 @@
 # Installation
 
 ```sh
-$ npm install <package> --save
+$ npm install lesca-sensor-orientation --save
 ```
 
 # Usage
 
 ```javascript
-import foo from 'foo';
+import Orientation from 'lesca-sensor-orientation';
+
+function require_permission() {
+	Orientation.init(
+		() => {
+			console.log('permission granted');
+			Orientation.addEvent((LR, FB, Dir) => {
+				console.log(LR, FB, Dir);
+			});
+		},
+		() => {
+			console.log('permission deined');
+		}
+	);
+}
+<button onClick={require_permission}>require permission</button>;
 ```
 
 # Methods
 
-| method | options | description | default |
-| :----- | :-----: | :---------: | ------: |
+| method                | options  |         description          | default |
+| :-------------------- | :------: | :--------------------------: | ------: |
+| init(granted, deined) | granted  | call when permission granted |         |
+|                       |  deined  | call when permission deined  |         |
+| addEvent(callback)    | callback |  get 3 axis value each time  |         |
+| destory()             |          |         remove event         |         |
 
 # Properties
 
-| Properties | type | description | default |
-| :--------- | :--: | :---------: | ------: |
+| Properties |  type   |         description          | default |
+| :--------- | :-----: | :--------------------------: | ------: |
+| disable    | boolean | stop / continue event listen |    true |
+| isSuppord  | boolean | permission granted or deined |   false |
