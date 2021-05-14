@@ -10,6 +10,12 @@ export default class Orientation {
 		this.isSuppord = false;
 	}
 
+	/**
+	 * initial on click event
+	 * @param {function} granted permission granted function
+	 * @param {function} deined permission deined function
+	 * @returns
+	 */
 	init(granted, deined = void 0) {
 		//desktop escap all
 		if (this.get() === 'desktop') {
@@ -61,12 +67,17 @@ export default class Orientation {
 		this.callback(g, b, a);
 	}
 
+	/**
+	 * add listener
+	 * @param {function} callback
+	 */
 	addListener(callback) {
 		const on = (LR, FB, Dir) => {
 			console.log(LR, FB, Dir);
 		};
 		this.callback = callback || on;
-		window.addEventListener('deviceorientation', (e) => this.call(e));
+		this.f = this.call.bind(this);
+		window.addEventListener('deviceorientation', this.f);
 	}
 
 	destory() {
