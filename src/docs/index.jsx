@@ -3,12 +3,13 @@ import { render } from 'react-dom';
 import Orientation from './../lib/index';
 
 import './styles.css';
+const orientation = new Orientation();
 
 function require_permission() {
-	Orientation.init(
+	orientation.init(
 		() => {
 			console.log('permission granted');
-			Orientation.addEvent((LR, FB, Dir) => {
+			orientation.addListener((LR, FB, Dir) => {
 				console.log(LR, FB, Dir);
 			});
 		},

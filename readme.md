@@ -11,11 +11,12 @@ $ npm install lesca-sensor-orientation --save
 ```javascript
 import Orientation from 'lesca-sensor-orientation';
 
+const orientation = new Orientation();
 function require_permission() {
-	Orientation.init(
+	orientation.init(
 		() => {
 			console.log('permission granted');
-			Orientation.addEvent((LR, FB, Dir) => {
+			orientation.addListener((LR, FB, Dir) => {
 				console.log(LR, FB, Dir);
 			});
 		},
@@ -33,7 +34,7 @@ function require_permission() {
 | :-------------------- | :------: | :--------------------------: | ------: |
 | init(granted, deined) | granted  | call when permission granted |         |
 |                       |  deined  | call when permission deined  |         |
-| addEvent(callback)    | callback |  get 3 axis value each time  |         |
+| addListener(callback) | callback |  get 3 axis value each time  |         |
 | destory()             |          |         remove event         |         |
 
 # Properties

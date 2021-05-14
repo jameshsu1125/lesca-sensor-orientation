@@ -1,6 +1,6 @@
 {
 	"name": "lesca-sensor-orientation",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "mobile sensor : device orientation. require permission => add event => return 3 axis value",
 	"main": "lib/index.js",
 	"scripts": {
