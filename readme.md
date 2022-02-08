@@ -10,16 +10,16 @@ $ npm install lesca-sensor-orientation --save
 
 ```javascript
 import { useState, useEffect, useMemo } from 'react';
-import Motion from 'lesca-sensor-orientation';
+import Orientation from 'lesca-sensor-orientation';
 
 // (1) waiting for permission => Must be user-triggered event and SSL required
 // (2) add addEventListener
 const Components = () => {
 	const [state, setState] = useState(false);
-	const motion = useMemo(() => new Motion(), []);
+	const orientation = useMemo(() => new Orientation(), []);
 
 	const require_permission = () => {
-		motion
+		orientation
 			.permission()
 			.then(() => {
 				// permission granted
@@ -32,12 +32,12 @@ const Components = () => {
 
 	useEffect(() => {
 		if (state) {
-			motion.addEventListener((e) => {
+			orientation.addEventListener((e) => {
 				alert(e);
 			});
 		}
 		return () => {
-			motion.destory();
+			orientation.destory();
 		};
 	}, [state]);
 
