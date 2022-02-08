@@ -1,4 +1,4 @@
-[![dev by JamesHsu](https://img.shields.io/badge/Dev%20by-Jameshsu1125-green)](https://github.com/jameshsu1125/) [![made in Taiwan](https://img.shields.io/badge/Made%20in-Taiwan-orange)](https://github.com/jameshsu1125/)
+[![dev by JamesHsu](https://img.shields.io/badge/Dev%20by-Jameshsu1125-green)](https://github.com/jameshsu1125/) [![made in Taiwan](https://img.shields.io/badge/Made%20in-Taiwan-orange)](https://github.com/jameshsu1125/) [![npm](https://img.shields.io/badge/npm-Jameshsu1125-red)](https://www.npmjs.com/~jameshsu1125)
 
 # Installation
 
@@ -9,34 +9,49 @@ $ npm install lesca-sensor-orientation --save
 # Usage
 
 ```javascript
-import Orientation from 'lesca-sensor-orientation';
+import { useState, useEffect, useMemo } from 'react';
+import Motion from 'lesca-sensor-orientation';
 
-const orientation = new Orientation();
-function require_permission() {
-	orientation.init(
-		() => {
-			console.log('permission granted');
-			orientation.addListener((LR, FB, Dir) => {
-				console.log(LR, FB, Dir);
+// (1) waiting for permission => Must be user-triggered event and SSL required
+// (2) add addEventListener
+const Components = () => {
+	const [state, setState] = useState(false);
+	const motion = useMemo(() => new Motion(), []);
+
+	const require_permission = () => {
+		motion
+			.permission()
+			.then(() => {
+				// permission granted
+				setState(true);
+			})
+			.catch(() => {
+				// permission deined
 			});
-		},
-		() => {
-			console.log('permission deined');
+	};
+
+	useEffect(() => {
+		if (state) {
+			motion.addEventListener((e) => {
+				alert(e);
+			});
 		}
-	);
-}
-// init have to exclude on click event
-<button onClick={require_permission}>require permission</button>;
+		return () => {
+			motion.destory();
+		};
+	}, [state]);
+
+	return <button onClick={require_permission}></button>;
+};
 ```
 
 # Methods
 
-| method                | options  |         description          | default |
-| :-------------------- | :------: | :--------------------------: | ------: |
-| init(granted, deined) | granted  | call when permission granted |         |
-|                       |  deined  | call when permission deined  |         |
-| addListener(callback) | callback |  get 3 axis value each time  |         |
-| destory()             |          |         remove event         |         |
+| method                     |    options     |        description         | default |
+| :------------------------- | :------------: | :------------------------: | ------: |
+| .permission()              | return Promise |    ask user permission     |         |
+| addEventListener(callback) |    callback    | get 3 axis value each time |         |
+| .destory()                 |                |       destory event        |         |
 
 # Properties
 
