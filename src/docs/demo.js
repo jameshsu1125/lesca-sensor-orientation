@@ -30,7 +30,6 @@ const Demo = () => {
 		// require permission
 		if (state) {
 			orientation.addEventListener((e) => {
-				console.log(e);
 				// get user shaking gravity value
 				setMessage(`detect orientation = ${JSON.stringify(e)}`);
 			});
