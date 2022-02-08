@@ -50,21 +50,14 @@ export default class Orientation {
 
 	call(e) {
 		if (!this.disable) return;
-		let d, t, h;
+		let alpha;
 		if (typeof e.webkitCompassHeading !== 'undefined') {
-			d = e.webkitCompassHeading;
-			if (typeof window.orientation !== 'undefined') d += window.orientation;
-		} else {
-			d = e.alpha;
-		}
+			alpha = e.webkitCompassHeading;
+			if (typeof window.orientation !== 'undefined') alpha += window.orientation;
+		} else alpha = e.alpha;
 
-		t = Math.round(d);
-		h = Math.round(d);
-		let g, b, a;
-		g = Math.round(e.gamma);
-		b = Math.round(e.beta);
-		a = h;
-		this.callback(g, b, a);
+		const { gamma, beta } = e;
+		this.callback({ alpha, beta, gamma });
 	}
 
 	/**
@@ -72,8 +65,8 @@ export default class Orientation {
 	 * @param {function} callback
 	 */
 	addEventListener(callback) {
-		const on = (LR, FB, Dir) => {
-			console.log(LR, FB, Dir);
+		const on = ({ alpha, beta, gamma }) => {
+			console.log(alpha, beta, gamma);
 		};
 		this.callback = callback || on;
 		this.f = this.call.bind(this);

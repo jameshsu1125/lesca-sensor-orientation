@@ -22,20 +22,21 @@ const Demo = () => {
 	};
 
 	const disable_switch = () => {
-		motion.disable = !motion.disable;
-		setMessage(motion.disable ? 'disable' : 'enable');
+		orientation.disable = !orientation.disable;
+		setMessage(orientation.disable ? 'disable' : 'enable');
 	};
 
 	useEffect(() => {
 		// require permission
 		if (state) {
-			motion.addListener((e) => {
+			orientation.addEventListener((e) => {
+				console.log(e);
 				// get user shaking gravity value
-				setMessage(`detect motion = ${JSON.stringify(e)}`);
+				setMessage(`detect orientation = ${JSON.stringify(e)}`);
 			});
 		}
 		return () => {
-			motion.destory();
+			orientation.destory();
 		};
 	}, [state]);
 
