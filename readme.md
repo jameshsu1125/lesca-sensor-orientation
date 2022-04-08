@@ -12,7 +12,7 @@ full steps for get mobile 3 axis value of mobile orientation.
 
 See <https://developer.mozilla.org/en-US/docs/Web/Events/Detecting_device_orientation> for a demonstration!
 
-#### [Live Demo](https://www.npmjs.com/~jameshsu1125)
+#### [Live Demo](https://jameshsu1125.github.io/lesca-sensor-orientation/)
 
 # Installation
 
