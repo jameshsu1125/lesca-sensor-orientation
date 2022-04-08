@@ -69,9 +69,9 @@ const Components = () => {
 
 | method                                    |        description         | return |
 | :---------------------------------------- | :------------------------: | -----: |
-| .permission()                             |    ask user permission     |        |
-| addEventListener(**callback**:_function_) | get 3 axis value each time |        |
-| .destory()                                |       destory event        |        |
+| .permission()                             |    ask user permission     |   void |
+| addEventListener(**callback**:_function_) | get 3 axis value each time |   void |
+| .destory()                                |       destory event        |   void |
 
 # Properties
 
